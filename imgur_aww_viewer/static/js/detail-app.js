@@ -1,5 +1,5 @@
 
-angular.module('project', ['ngResource'])
+angular.module('project', ['ngResource', 'ngDisqus'])
     .controller('DetailAppCtrl', ['$scope', '$http', '$resource', function($scope, $http, $resource) {
 
         // TODO: move headers set to base module/config/controller

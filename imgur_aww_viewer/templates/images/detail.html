@@ -4,23 +4,38 @@
 
 {% block content %}
 
-<div class="container " ng-controller="DetailAppCtrl">
-{% verbatim %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Attribute</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="attr in attributes">
-                <td>{{ attr.name }}</td>
-                <td>{{ attr.value }}</td>
-            </tr>
-        </tbody>
-    </table>
-{% endverbatim %}
+<div class="container">
+
+    <a href="{% url 'images:index' %}" class="btn btn-inverse btn-small">
+        <i class="icon-white icon-arrow-left"></i> Back
+    </a>
+
+    <div ng-controller="DetailAppCtrl">
+    {% verbatim %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="attr in attributes">
+                    <td>{{ attr.name }}</td>
+                    <td>{{ attr.value }}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% endverbatim %}
+    </div>
+
+    <dir-disqus
+            disqus-shortname="{{ settings.DISQUS_SHORTNAME }}"
+            disqus-identifier="{{ image_id }}"
+            disqus-url="{% url 'images:detail' image_id %}">
+    </dir-disqus>
+    <div disqus="{{ image_id }}"></div>
+
 </div>
 
 {% endblock content %}
@@ -30,5 +45,7 @@
         var imageId = '{{ image_id }}',
             IMGUR_CLIENT_ID = '{{ settings.IMGUR_CLIENT_ID }}';
     </script>
+
+    <script src="{% static 'js/angular-disqus.js' %}"></script>
     <script src="{% static 'js/detail-app.js' %}"></script>
 {% endblock extra_javascript %}
