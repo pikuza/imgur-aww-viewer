@@ -1,9 +1,34 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
 {% block content %}
+
+<div class="container " ng-controller="DetailAppCtrl">
+{% verbatim %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="attr in attributes">
+                <td>{{ attr.name }}</td>
+                <td>{{ attr.value }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endverbatim %}
+</div>
 
 {% endblock content %}
 
 {% block extra_javascript %}
-
+    <script type="text/javascript">
+        var imageId = '{{ image_id }}',
+            IMGUR_CLIENT_ID = '{{ settings.IMGUR_CLIENT_ID }}';
+    </script>
+    <script src="{% static 'js/detail-app.js' %}"></script>
 {% endblock extra_javascript %}

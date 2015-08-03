@@ -1,9 +1,30 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
 {% block content %}
+
+<div class="container " ng-controller="IndexAppCtrl">
+{% verbatim %}
+    <div class="panel" ng-repeat="image in images">
+        <div class="panel-heading clearfix">
+            <h3 class="panel-title">{{ image.title }}</h3>
+            <a href="{{ image.url }}">
+                <img class="img-thumbnail"
+                     ng-src="{{ image.link }}"
+                     width="200" height="200">
+            </a>
+        </div>
+    </div>
+{% endverbatim %}
+</div>
 
 {% endblock content %}
 
 {% block extra_javascript %}
-
+    <script type="text/javascript">
+        var IMGUR_CLIENT_ID = '{{ settings.IMGUR_CLIENT_ID }}';
+    </script>
+    <script src="{% static 'djangular/js/django-angular.js' %}"></script>
+    <script src="{% static 'js/index-app.js' %}"></script>
 {% endblock extra_javascript %}
