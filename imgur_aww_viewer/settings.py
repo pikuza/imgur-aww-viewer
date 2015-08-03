@@ -12,9 +12,17 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+import imgur_aww_viewer as project_module
+
+PROJECT_DIR = os.path.dirname(os.path.realpath(project_module.__file__))
+APPS_ROOT = os.path.join(PROJECT_DIR, 'apps')
+
+# add apps root dir to pythonpath so we can directly import from apps modules
+sys.path.append(APPS_ROOT)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -37,6 +45,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # project apps located at imgur_aww_viewer.apps.*
+    'images',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,7 +66,9 @@ ROOT_URLCONF = 'imgur_aww_viewer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(PROJECT_DIR, 'templates/'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,3 +113,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_DIR, 'static'),
+)
