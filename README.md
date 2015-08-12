@@ -15,17 +15,19 @@ Technologies/frameworks stack
 Quick start
 -----------
 
-1. Activate/create virtual environment
 ```sh
+# Activate/create virtual environment
 $ mkvirtualenv imgur-aww-viewer
 $ workon imgur-aww-viewer
-```
-2. Install all the requirements
-```sh
-$ pip install -r requirements.pip
-```
-3. Run the server
-```sh
+
+# Install all the requirements
+$ pip install -r requirements.txt
+
+# Run the server
 $ python manage.py runserver
+
+# Open page in browser
+$ open http://localhost:8000/
+
 ```
-4. Visit page in browser `http://localhost:8000/`
+
